@@ -15,14 +15,14 @@ public class PercolationStats {
         thresholds = new double[T];
     }
 
-    public void simulate() {
+    private void simulate() {
         for (int i = 0; i < T; i ++){
             thresholds[i] = getThreshold();
 
         }
 
     }
-    public double getThreshold() {
+    private double getThreshold() {
         int[] sites = new int[N * N];
         for (int i = 0; i < N * N; i ++) {
             sites[i] = i + 1;
