@@ -19,12 +19,17 @@ public class Percolation {
         sites = new boolean[num * num + 1];
     }
 
+    private void validate(int row, int col) {
+        if (row < 1|| row > num || col < 1 || col > num) throw new IllegalArgumentException();
+    }
+
     private int getIndex(int row, int col) {
         return (row - 1) * num + col;
     }
 
     // opens the site (row, col) if it is not open already
     public void open(int row, int col) {
+        validate(row, col);
         int index = getIndex(row, col);
         if (sites[index]) return;
         numberOfOpened ++;
@@ -60,11 +65,13 @@ public class Percolation {
 
     // is the site (row, col) open?
     public boolean isOpen(int row, int col) {
+        validate(row, col);
         return sites[getIndex(row, col)];
     }
 
     // is the site (row, col) full?
     public boolean isFull(int row, int col) {
+        validate(row, col);
         return uf.find(0) == uf.find(getIndex(row, col));
     }
 
@@ -87,12 +94,15 @@ public class Percolation {
         p.open(1, 1);
         System.out.println(p.percolates());
         p.open(2, 1);
+        System.out.println(p.isFull(2, 1));
         System.out.println(p.percolates());
         p.open(3, 2);
         System.out.println(p.percolates());
         p.open(2, 3);
         System.out.println(p.percolates());
+        System.out.println(p.isFull(2, 2));
         p.open(2, 2);
         System.out.println(p.percolates());
+        System.out.println(p.isFull(2, 2));
     }
 }
