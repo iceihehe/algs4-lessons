@@ -3,27 +3,28 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 
-    private int N;
-    private WeightedQuickUnionUF uf;
+    private final int num;
+    private final WeightedQuickUnionUF uf;
     private boolean[] sites;
     private boolean connected = false;
     private int numberOfOpened = 0;
 
-    private int getIndex (int row, int col) {
-        return (row - 1) * N + col;
-    }
 
     // creates n-by-n grid, with all sites initially blocked
-    public Percolation(int n){
+    public Percolation(int n) {
         if (n <= 0) throw new IllegalArgumentException();
 
-        N = n;
-        uf = new WeightedQuickUnionUF(N * N + 2);
-        sites = new boolean[N * N + 1];
+        num = n;
+        uf = new WeightedQuickUnionUF(num * num + 2);
+        sites = new boolean[num * num + 1];
+    }
+
+    private int getIndex(int row, int col) {
+        return (row - 1) * num + col;
     }
 
     // opens the site (row, col) if it is not open already
-    public void open(int row, int col){
+    public void open(int row, int col) {
         int index = getIndex(row, col);
         if (sites[index]) return;
         numberOfOpened ++;
@@ -32,14 +33,14 @@ public class Percolation {
         if (row == 1) {
             uf.union(index, 0);
         }
-        if (row == N) {
-            uf.union(index, N * N + 1);
+        if (row == num) {
+            uf.union(index, num * num + 1);
         }
         if (row > 1 && isOpen(row - 1, col)) {
             uf.union(index, getIndex(row - 1, col));
 
         }
-        if (row < N && isOpen(row + 1, col)) {
+        if (row < num && isOpen(row + 1, col)) {
             uf.union(index, getIndex(row + 1, col));
 
         }
@@ -47,23 +48,23 @@ public class Percolation {
             uf.union(index, getIndex(row, col - 1));
 
         }
-        if (col < N && isOpen(row, col + 1)) {
+        if (col < num && isOpen(row, col + 1)) {
             uf.union(index, getIndex(row, col + 1));
 
         }
 
-        if (uf.find(0) == uf.find(N * N + 1)) {
+        if (uf.find(0) == uf.find(num * num + 1)) {
             connected = true;
         }
     }
 
     // is the site (row, col) open?
-    public boolean isOpen(int row, int col){
+    public boolean isOpen(int row, int col) {
         return sites[getIndex(row, col)];
     }
 
     // is the site (row, col) full?
-    public boolean isFull(int row, int col){
+    public boolean isFull(int row, int col) {
         return uf.find(0) == uf.find(getIndex(row, col));
     }
 
@@ -78,7 +79,7 @@ public class Percolation {
     }
 
     // test client (optional)
-    public static void main(String[] args){
+    public static void main(String[] args) {
 //        int n = StdIn.readInt();
         int n = 3;
         Percolation p = new Percolation(n);

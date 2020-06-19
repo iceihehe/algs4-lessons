@@ -5,41 +5,42 @@ import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
 
-    private int N;
-    private int T;
+    private final int num;
+    private final int times;
     private double[] thresholds;
+    private final double co = 1.96;
 
     public PercolationStats(int n, int t) {
-        N = n;
-        T = t;
-        thresholds = new double[T];
+        num = n;
+        times = t;
+        thresholds = new double[times];
     }
 
     private void simulate() {
-        for (int i = 0; i < T; i ++){
+        for (int i = 0; i < times; i ++){
             thresholds[i] = getThreshold();
 
         }
 
     }
     private double getThreshold() {
-        int[] sites = new int[N * N];
-        for (int i = 0; i < N * N; i ++) {
+        int[] sites = new int[num * num];
+        for (int i = 0; i < num * num; i ++) {
             sites[i] = i + 1;
         }
         StdRandom.shuffle(sites);
-        Percolation percolation = new Percolation(N);
+        Percolation percolation = new Percolation(num);
 
         int k = 0;
         for (int site: sites) {
-            int col = (site - 1) / N + 1;
-            int row = (site - 1) % N + 1;
+            int col = (site - 1) / num + 1;
+            int row = (site - 1) % num + 1;
             percolation.open(col, row);
             k ++;
             if (percolation.percolates()) break;
         }
 
-        return (double) k / (double) (N * N);
+        return (double) k / (double) (num * num);
     }
     public double mean() {
         return StdStats.mean(thresholds);
@@ -50,11 +51,11 @@ public class PercolationStats {
     }
     public double confidenceLo() {
 
-        return mean() - 1.96 * Math.sqrt(stddev() / T);
+        return mean() - co * Math.sqrt(stddev() / times);
     }
     public double confidenceHi() {
 
-        return mean() + 1.96 * Math.sqrt(stddev() / T);
+        return mean() + co * Math.sqrt(stddev() / times);
     }
     public static void main(String[] args) {
         if (args.length != 2) throw new IllegalArgumentException();
