@@ -104,10 +104,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Iterator<Item> iterator() {
         return new RandomizedQueueIterator();
     }
-
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
+//
+//    public void remove() {
+//        throw new UnsupportedOperationException();
+//    }
 
     public static void main(String[] args) {
         RandomizedQueue<String> queue = new RandomizedQueue<>();

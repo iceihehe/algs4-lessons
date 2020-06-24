@@ -94,10 +94,10 @@ public class Deque<Item> implements Iterable<Item> {
         size_--;
         return item;
     }
-
-    public void remove() {
-        throw new UnsupportedOperationException();
-    }
+//
+//    public void remove() {
+//        throw new UnsupportedOperationException();
+//    }
 
 
     private class DequeIterator implements Iterator<Item> {
