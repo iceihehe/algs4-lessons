@@ -86,10 +86,10 @@ public class Deque<Item> implements Iterable<Item> {
         }
         Item item = last.item;
         last = last.previous;
-        if (last == null) {
-            first = null;
-        } else {
+        if (last != null) {
             last.next = null;
+        } else {
+            first = null;
         }
         size_--;
         return item;
@@ -131,10 +131,9 @@ public class Deque<Item> implements Iterable<Item> {
         for (int i : deque) {
             System.out.println(i);
         }
-        deque.removeFirst();
-        deque.removeLast();
+        System.out.println(deque.removeFirst());
+        System.out.println(deque.removeLast());
         System.out.println(deque.isEmpty());
         System.out.println(deque.size());
-        deque.remove();
     }
 }
