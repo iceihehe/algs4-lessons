@@ -46,11 +46,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         int index = StdRandom.uniform(size_);
         Item item = queue[index];
-        System.out.println(item);
         queue[index] = null;
+        justiceQueue(queue, index, size_ - 1);
         size_--;
-        justiceQueue(queue, index, size_);
-        if (size_ == queue.length / 4) {
+        if (size_ > 0 && size_ == queue.length / 4) {
             resize(queue.length / 2);
         }
         return item;
@@ -73,7 +72,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private class RandomizedQueueIterator implements Iterator<Item> {
 
-        private Item[] copiedQueue;
+        private final Item[] copiedQueue;
         private int currentIndex;
 
         public RandomizedQueueIterator() {
@@ -110,14 +109,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 //    }
 
     public static void main(String[] args) {
-        RandomizedQueue<String> queue = new RandomizedQueue<>();
-        queue.enqueue("a");
-        queue.enqueue("b");
-        queue.enqueue("c");
-
-        Iterator iterator = queue.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+        RandomizedQueue rq = new RandomizedQueue();
+        rq.isEmpty();
+        System.out.println(rq.size());
+        rq.enqueue(11);
+        System.out.println(rq.size());
+        rq.dequeue();
     }
 }
