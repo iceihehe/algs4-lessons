@@ -23,7 +23,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private void resize(int capacity) {
         Item[] newQueue = (Item[]) new Object[capacity];
-        for (int i = 0; i < queue.length; i++) {
+        for (int i = 0; i < size_; i++) {
             newQueue[i] = queue[i];
         }
         queue = newQueue;
@@ -110,10 +110,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public static void main(String[] args) {
         RandomizedQueue rq = new RandomizedQueue();
-        rq.isEmpty();
-        System.out.println(rq.size());
-        rq.enqueue(11);
-        System.out.println(rq.size());
-        rq.dequeue();
+        System.out.println(rq.isEmpty());
+        System.out.println(rq.dequeue());
     }
 }
