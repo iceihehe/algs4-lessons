@@ -1,3 +1,15 @@
+/******************************************************************************
+ *  Compilation:  javac Point.java
+ *  Execution:    java Point
+ *  Dependencies: none
+ *
+ *  An immutable data type for points in the plane.
+ *  For use on Coursera, Algorithms Part I programming assignment.
+ *
+ ******************************************************************************/
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdDraw;
 
@@ -90,8 +102,15 @@ public class Point implements Comparable<Point> {
     public static void main(String[] args) {
         Point p = new Point(1, 2);
         Point q = new Point(0, -1);
+        Point r = new Point(0, -3);
         System.out.println(p.compareTo(q));
         System.out.println(p.slopeTo(q));
+        Point[] points = new Point[3];
+        points[0] = p;
+        points[1] = r;
+        points[2] = q;
+        Arrays.sort(points, p.slopeOrder());
+        System.out.println(Arrays.toString(points));
     }
 
 
