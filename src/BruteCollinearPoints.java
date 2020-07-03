@@ -9,14 +9,6 @@ public class BruteCollinearPoints {
 
     private ArrayList<SegmentNode> segmentNodes;
 
-    private class SegmentNode {
-        private Point p;
-        private Point q;
-        private double slope;
-
-    }
-
-
     public BruteCollinearPoints(Point[] points) {
         if (points == null) throw new IllegalArgumentException();
 
@@ -50,6 +42,13 @@ public class BruteCollinearPoints {
                 }
             }
         }
+    }
+
+    private class SegmentNode {
+        private Point p;
+        private Point q;
+        private double slope;
+
     }
 
     private void mark(Point a, Point b, Double slope) {
