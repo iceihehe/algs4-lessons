@@ -1,6 +1,5 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
-import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +12,6 @@ public class BruteCollinearPoints {
         if (points == null) {
             throw new IllegalArgumentException();
         }
-        // Points array passsed to the constructor can be changed by some other parts of the code while construction is still in progress.
         this.points = Arrays.copyOf(points, points.length);
         for (Point point : this.points) {
             if (point == null) {
@@ -26,8 +24,6 @@ public class BruteCollinearPoints {
                 throw new IllegalArgumentException();
             }
         }
-        // Stores a reference to an externally mutable object in the instance variable 'points', exposing the internal representation of the class.
-        // Instead, create a defensive copy of the object referenced by the parameter variable 'points' and store that copy in the instance variable 'points'.
         cached = cache();
     }
 
@@ -37,11 +33,11 @@ public class BruteCollinearPoints {
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 for (int k = j + 1; k < n; k++) {
-                    for (int m = k + 1; m < n; m++) {
+                    for (int l = k + 1; l < n; l++) {
                         Point p = points[i];
                         Point q = points[j];
                         Point r = points[k];
-                        Point s = points[m];
+                        Point s = points[l];
                         double slope1 = p.slopeTo(q);
                         double slope2 = p.slopeTo(r);
                         double slope3 = p.slopeTo(s);
@@ -61,8 +57,6 @@ public class BruteCollinearPoints {
     }
 
     public LineSegment[] segments() {
-        // check that data type is immutable by testing whether each method
-        // returns the same value, regardless of any intervening operations
         return Arrays.copyOf(cached, cached.length);
     }
 
